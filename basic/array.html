@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 배열
+      // 1. 생성
+      const cars = ["버스", "자동차", "택시"];
+      const cars2 = new Array("버스", "자동차", "택시");
+      const others = ["과일", 1, 3.14, new Date(), {}]; // 다양한 타입을 담을 수 있음
+
+      // 2. 메소드
+      console.log("1. 배열 크기 ", cars.length);
+      console.log("2. 문자열 ", cars.toString()); // , 로 분리해서 문자로 반환
+      console.log("3. 특정 요소 ", cars[1]);
+      // 배열 요소 추가
+      // 1. push() : 맨 뒤에 추가
+      // 2. unshift() : 맨 앞에 추가
+      cars.push("멜론");
+      cars.unshift("딸기");
+      console.log(cars);
+      // 특정위치 지정 : 요소 수정
+      cars[2] = "바나나";
+      console.log(cars);
+      // splice(인덱스, 제거할 요소 개수, 추가할 요소) : 삭제 / 추가 사용
+      cars.splice(2, 0, "자동차");
+      console.log(cars);
+
+      // 배열 요소 삭제
+      cars.pop(); // 맨 끝 요소 삭제
+      console.log(cars);
+      cars.shift(); // 처음 요소 삭제
+      console.log(cars);
+      // cars.splice(2); // 지정된 위치부터 끝까지 삭제
+      cars.splice(2, 1); // 지정된 위치부터 지정한 개수만 삭제
+      console.log(cars);
+
+      console.log("지정된 문자열로 요소를 연결 ", cars.join("-"));
+      console.log("다른 배열과 연결 ", cars.concat(cars2));
+      console.log(cars);
+      console.log("배열 자르기 ", cars.slice(1, 2));
+      cars.push("강아지");
+      console.log("정렬 전 ", cars);
+      cars.sort(); // 원본 정렬이 일어남
+      console.log("배열 오름차순 정렬(문자) ", cars);
+
+      // toSorted() : 2023버전 추가
+      //              정렬할 배열 새 배열로 생성 => sort 함
+      const months = ["Jan", "Feb", "Mar", "Apr"];
+      const sorted = months.toSorted();
+      console.log("months ", months);
+      console.log("sorted ", sorted);
+
+      //
+      const array1 = [12, 6, 9, 1, 3, 24];
+      array1.sort(function (a, b) {
+        // 오름차순 정렬
+        // return a - b;
+
+        // 내림차순 정렬
+        return b - a;
+      });
+      console.log("배열 정렬(숫자) ", array1);
+
+      // toReversed()
+      console.log("배열 요소 뒤에서 출력 ", cars.reverse());
+      console.log(cars);
+
+      // 검색 메소드 : indexOf(), lastIndexOf(), includes()
+      //               find()
+      console.log("인덱스 찾기 ", cars.indexOf("자동차"));
+      console.log("인덱스 찾기 ", cars.indexOf("망고"));
+      console.log("요소 포함 여부 ", cars.includes("망고"));
+      console.log("요소 포함 여부 ", cars.includes("자동차"));
+
+      // array1.find(특정조건과 일치하는 요소 찾기 : 함수 구성)
+      // 5보다 큰 제일 첫번째 숫자 array1 = [24, 12, 9, 6, 3, 1];
+      console.log(array1);
+      console.log(
+        "5보다 큰 제일 첫번째 숫자 ",
+        array1.find((item) => item > 5)
+      );
+      console.log(
+        "5보다 큰 제일 첫번째 숫자 인덱스 ",
+        array1.findIndex((item) => item > 5)
+      );
+
+      // 배열 출력
+      console.log(array1);
+
+      // 배열 요소 하나씩 접근
+      for (let i = 0; i < array1.length; i++) {
+        console.log(array1[i]);
+      }
+
+      for (const element of array1) {
+        console.log(element);
+      }
+
+      array1.forEach((element) => {
+        console.log(element);
+      });
+
+      // 배열 복사
+      const array2 = [];
+      array1.forEach((item) => {
+        array2.push(item);
+      });
+      console.log(array2);
+
+      // 깊은 복사
+      // ... : spread 연산자 - 배열 or object 복사
+      const shallowCopy = [...array1];
+      console.log(shallowCopy);
+
+      console.log("원본 array1 ", array1);
+      array1.push(28);
+      console.log("원본 array1 ", array1);
+      console.log("복사본 shallowCopy ", shallowCopy);
+
+      const numbersOne = [1, 2, 3];
+      const numbersTwo = [4, 5, 6];
+      // numbersOne, numbersTwo 를 합쳐서 하나의 배열로 생성
+      const numbersCombined = [...numbersOne, ...numbersTwo];
+      console.log("합친 후 ", numbersCombined);
+
+      // 일반개념
+      const fruits = ["사과", "딸기", "포도"];
+      const apple = fruits[0];
+      const berry = fruits[1];
+      const grape = fruits[2];
+
+      // Destructuring : 구조분해
+      const [apple1, berry1, grape1] = fruits;
+
+      const numbers = [1, 2, 3, 4, 5, 6];
+      const [one, two, ...rest] = numbers;
+      console.log("one ", one);
+      console.log("two ", two);
+      console.log("rest ", rest);
+
+      // 얕은 복사(주소복사)
+      const cars3 = cars2;
+      console.log("복사본 cars3 ", cars3);
+      console.log("원본 cars2 ", cars2);
+      //원본 요소 추가
+      cars2.push("자전거");
+      //복사본에도 요소가 추가됨
+      console.log("복사본 cars3 ", cars3);
+      console.log("원본 cars2 ", cars2);
+    </script>
+  </body>
+</html>
